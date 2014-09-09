@@ -6,6 +6,8 @@ name := "hello-dropwizard"
 
 scalaVersion := "2.10.1"
 
+sbtVersion := "0.13.1"
+
 resolvers ++= Seq(
    "Coda Hale repo" at "http://repo.codahale.com/"
  )
