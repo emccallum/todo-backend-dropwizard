@@ -1,4 +1,6 @@
+import com.typesafe.sbt.SbtStartScript
 import sbtassembly.Plugin.AssemblyKeys._
+import com.typesafe.sbt.SbtStartScript.settings
 
 assemblySettings
 
@@ -17,4 +19,6 @@ libraryDependencies ++= Seq(
   "com.massrelevance" %% "dropwizard-scala" % "0.7.1"
 )
 
-mainClass in assembly := Some("com.hellodropwizard.service.SimpleService")
+seq(SbtStartScript.startScriptForClassesSettings: _*)
+
+mainClass in assembly := Some("emccallum.service.TodoService")
