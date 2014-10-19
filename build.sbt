@@ -4,17 +4,13 @@ assemblySettings
 
 name := "hello-dropwizard"
 
-scalaVersion := "2.10.1"
-
-sbtVersion := "0.13.1"
+scalaVersion := "2.10.2"
 
 resolvers ++= Seq(
    "Coda Hale repo" at "http://repo.codahale.com/"
  )
 
-resolvers += Classpaths.typesafeReleases
-
-addSbtPlugin("com.typesafe.sbt" %% "sbt-start-script" % "0.10.0")
+resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 
 libraryDependencies ++= Seq(
   "io.dropwizard" % "dropwizard-core" % "0.7.1",
