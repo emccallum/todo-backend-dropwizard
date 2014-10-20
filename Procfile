@@ -1,1 +1,1 @@
-web: target/scala-2.10/classes/emccallum/service/TodoService
+web: target/start server
