@@ -1,4 +1,4 @@
-package emccallum.service
+package scala.emccallum.service
 
 import io.dropwizard.Configuration
 

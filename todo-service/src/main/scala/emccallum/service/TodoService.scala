@@ -1,9 +1,9 @@
-package emccallum.service
+package scala.emccallum.service
 
 import io.dropwizard.setup.{Environment, Bootstrap}
-import com.massrelevance.dropwizard.bundles.ScalaBundle
 import com.massrelevance.dropwizard.ScalaApplication
-import emccallum.resource.TodoResource
+import com.massrelevance.dropwizard.bundles.ScalaBundle
+import scala.emccallum.resource.TodoResource
 
 object TodoService extends ScalaApplication[TodoServiceConfiguration] {
   def initialize(bootstrap: Bootstrap[TodoServiceConfiguration]) {
