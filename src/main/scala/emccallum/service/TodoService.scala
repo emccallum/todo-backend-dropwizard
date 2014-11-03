@@ -11,6 +11,6 @@ object TodoService extends ScalaApplication[TodoServiceConfiguration] {
   }
 
   override def run(configuration: TodoServiceConfiguration, environment: Environment): Unit = {
-    environment.jersey().register(new TodoResource("elise"))
+    environment.jersey().register(new TodoResource())
   }
 }

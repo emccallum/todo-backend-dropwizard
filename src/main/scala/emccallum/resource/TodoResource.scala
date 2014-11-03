@@ -5,7 +5,7 @@ import javax.ws.rs.Path
 import javax.ws.rs.core.Response
 
 @Path("/")
-class TodoResource(val defaultName: String) {
+class TodoResource() {
 
   @GET
   def sayHello(): Response =
