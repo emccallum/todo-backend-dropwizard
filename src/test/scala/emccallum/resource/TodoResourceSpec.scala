@@ -14,8 +14,8 @@ class TodoResourceSpec extends Specification {
 
       // Then
       response.getStatus shouldEqual 200
-      response.getMetadata.get("access-control-allow-origin").get(0) shouldEqual "*"
-      response.getMetadata.get("access-control-allow-headers").get(0) shouldEqual true
+      response.getMetadata.get("Access-Control-Allow-Origin").get(0) shouldEqual "*"
+      response.getMetadata.get("Access-Control-Allow-Headers").get(0) shouldEqual "origin, content-type, accept, authorization"
     }
   }
 
