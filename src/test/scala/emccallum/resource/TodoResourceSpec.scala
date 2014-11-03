@@ -1,4 +1,4 @@
-package scala.emccallum.resource
+package emccallum.resource
 
 import org.specs2.mutable.Specification
 

@@ -1,4 +1,4 @@
-package scala.emccallum.resource
+package emccallum.resource
 
 import javax.ws.rs.core.Response
 import javax.ws.rs.{Path, GET}
