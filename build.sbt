@@ -1,7 +1,8 @@
+import com.typesafe.sbt.SbtStartScript
 import sbtassembly.Plugin.AssemblyKeys._
-import NativePackagerKeys._
+import com.typesafe.sbt.SbtStartScript.settings
 
-packageArchetype.java_application
+assemblySettings
 
 name := "hello-dropwizard"
 
@@ -17,5 +18,7 @@ libraryDependencies ++= Seq(
   "io.dropwizard" % "dropwizard-core" % "0.7.1",
   "com.massrelevance" %% "dropwizard-scala" % "0.7.1"
 )
+
+seq(SbtStartScript.startScriptForClassesSettings: _*)
 
 mainClass in assembly := Some("emccallum.service.TodoService")
