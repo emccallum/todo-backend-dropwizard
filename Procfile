@@ -1,1 +1,1 @@
-web: target/start server
+web: target/start server default-config.yaml
