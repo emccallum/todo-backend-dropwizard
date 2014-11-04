@@ -1,7 +1,7 @@
 package emccallum.resource
 
 import org.specs2.mutable.Specification
-import emccallum.representations.{TodosRepresentation, TodoRepresentation, NewTodoRepresentation}
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 import org.specs2.specification.Scope
 import emccallum.repositories.TodoRepository
@@ -52,18 +52,16 @@ class TodoResourceSpec extends Specification with Mockito {
       response.getStatus shouldEqual 204
     }
 
-//    "return an array of todos for a GET request" in new TodoScope {
-//      // Given
-//      val todos = Seq(Todo("title"))
-//      mockTodoRepository.retrieveAll() returns todos
-//      val resource = new TodoResource(todoRepository = mockTodoRepository)
-//
-//      // When
-//      val response = resource.retrieveAll()
-//
-//      // Then
-//      response.getEntity shouldEqual TodosRepresentation(todos)
-//    }
+    "POSTing a todo adds a todo" in new TodoScope {
+      // Given
+      val resource = new TodoResource(todoRepository = mockTodoRepository)
+
+      // When
+      resource.create(NewTodoRepresentation(title = "title"))
+
+      // Then
+      there was one(mockTodoRepository).addTodo(Todo("title"))
+    }
   }
 
 }

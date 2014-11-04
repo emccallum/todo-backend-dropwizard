@@ -21,6 +21,7 @@ class TodoResource(todoRepository: TodoRepository) {
   @POST
   def create(newTodo: NewTodoRepresentation): Response = {
     val todo = Todo(newTodo.title)
+    todoRepository.addTodo(todo)
     Response.created(URI.create("")).entity(TodoRepresentation(todo)).build()
   }
 

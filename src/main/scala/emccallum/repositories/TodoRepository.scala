@@ -8,4 +8,8 @@ class TodoRepository {
 
   def retrieveAll(): Seq[Todo] = todos
 
+  def addTodo(todo: Todo) {
+    todos = todos :+ todo
+  }
+
 }
