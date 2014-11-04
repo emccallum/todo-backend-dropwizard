@@ -1,5 +1,5 @@
 package emccallum.model
 
-case class Todo(name: String) {
+case class Todo(title: String) {
 
 }

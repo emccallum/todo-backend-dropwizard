@@ -24,6 +24,6 @@ class TodoResource() {
 }
 
 case class TodoRepresentation(private val todo: Todo) {
-  @JsonProperty("name")
-  lazy val name = todo.name
+  @JsonProperty("title")
+  lazy val title = todo.title
 }
