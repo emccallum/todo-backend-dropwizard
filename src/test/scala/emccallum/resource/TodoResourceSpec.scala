@@ -62,6 +62,19 @@ class TodoResourceSpec extends Specification with Mockito {
       // Then
       there was one(mockTodoRepository).addTodo(Todo("title"))
     }
+
+    "GET should return all todos" in new TodoScope {
+      // Given
+      val todo = Todo("title")
+      mockTodoRepository.retrieveAll() returns Seq(todo)
+      val resource = new TodoResource(todoRepository = mockTodoRepository)
+
+      // When
+      val response = resource.retrieveAll()
+
+      // Then
+      response.getEntity shouldEqual Seq(todo)
+    }
   }
 
 }
