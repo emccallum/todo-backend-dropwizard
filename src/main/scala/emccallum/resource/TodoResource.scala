@@ -1,18 +1,20 @@
 package emccallum.resource
 
 import javax.ws.rs.core.Response
-import javax.ws.rs.{Path, GET}
-import javax.ws.rs.core.Response.ResponseBuilder
+import javax.ws.rs.{POST, Path, GET}
+import java.net.URI
 
 @Path("/")
 class TodoResource() {
 
   @GET
-  def sayHello(): Response = {
-    Response
-      .ok()
-      .entity("helllo")
-      .build()
+  def retrieve(): Response = {
+    Response.ok().entity("helllo").build()
+  }
+
+  @POST
+  def create(): Response = {
+    Response.created(URI.create("")).build()
   }
 
 }

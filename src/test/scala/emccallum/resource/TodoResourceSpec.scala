@@ -5,17 +5,26 @@ import org.specs2.mutable.Specification
 class TodoResourceSpec extends Specification {
 
   "TodoResource" should {
-    "include cross origin headers in the response for a GET request" in {
+    "return a 200 if the GET is successful" in {
       // Given
       val resource = new TodoResource()
 
       // When
-      val response = resource.sayHello()
+      val response = resource.retrieve()
 
       // Then
       response.getStatus shouldEqual 200
-      response.getMetadata.get("Access-Control-Allow-Origin").get(0) shouldEqual "*"
-      response.getMetadata.get("Access-Control-Allow-Headers").get(0) shouldEqual "origin, content-type, accept, authorization"
+    }
+
+    "return a 201 if the POST is successful" in {
+      // Given
+      val resource = new TodoResource()
+
+      // When
+      val response = resource.create()
+
+      // Then
+      response.getStatus shouldEqual 201
     }
   }
 

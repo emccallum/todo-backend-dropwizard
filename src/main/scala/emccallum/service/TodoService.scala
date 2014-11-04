@@ -23,7 +23,6 @@ object TodoService extends ScalaApplication[TodoServiceConfiguration] {
   private def addCorsHeader(environment: Environment) {
     val filter = environment.servlets().addFilter("CORS", classOf[CrossOriginFilter])
     filter.addMappingForUrlPatterns(util.EnumSet.allOf(classOf[DispatcherType]), true, "/*")
-//    filter.setInitParameter("allowedHeaders", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin")
     filter.setInitParameter("allowedOrigins", "*")
     filter.setInitParameter("allowedMethods", "GET,PUT,POST,DELETE,OPTIONS,HEAD,PATCH")
   }
