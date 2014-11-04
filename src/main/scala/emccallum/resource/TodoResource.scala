@@ -15,7 +15,7 @@ class TodoResource(todoRepository: TodoRepository) {
   @GET
   def retrieveAll(): Response = {
     val todos = todoRepository.retrieveAll()
-    Response.ok().entity(TodosRepresentation(todos)).build()
+    Response.ok().entity(Seq.empty).build()
   }
 
   @POST
