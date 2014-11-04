@@ -9,10 +9,13 @@ class TodoResource() {
 
   @GET
   def sayHello(): Response = {
-    Response.ok().
-    header("Access-Control-Allow-Origin", "*").
-    header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization").
-    header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD").build()
+    Response
+      .ok()
+      .header("Access-Control-Allow-Origin", "*")
+      .header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization")
+      .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+      .entity("helllo")
+      .build()
   }
 
 }
