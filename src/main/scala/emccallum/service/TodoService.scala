@@ -8,6 +8,7 @@ import org.eclipse.jetty.servlets.CrossOriginFilter
 import javax.servlet.{Filter, DispatcherType}
 import java.util
 import com.sun.jersey.api.core.ResourceConfig
+import emccallum.repositories.TodoRepository
 
 object TodoService extends ScalaApplication[TodoServiceConfiguration] {
   def initialize(bootstrap: Bootstrap[TodoServiceConfiguration]) {
@@ -16,7 +17,7 @@ object TodoService extends ScalaApplication[TodoServiceConfiguration] {
 
   override def run(configuration: TodoServiceConfiguration, environment: Environment): Unit = {
     addCorsHeader(environment)
-    environment.jersey().register(new TodoResource())
+    environment.jersey().register(new TodoResource(new TodoRepository))
     environment.jersey().property(ResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, classOf[Filter])
   }
 

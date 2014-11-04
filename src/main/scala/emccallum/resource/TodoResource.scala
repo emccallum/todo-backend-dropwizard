@@ -5,15 +5,17 @@ import javax.ws.rs._
 import java.net.URI
 import emccallum.representations.{TodosRepresentation, TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
+import emccallum.repositories.TodoRepository
 
 @Path("/")
 @Consumes(Array(MediaType.APPLICATION_JSON))
 @Produces(Array(MediaType.APPLICATION_JSON))
-class TodoResource() {
+class TodoResource(todoRepository: TodoRepository) {
 
   @GET
-  def retrieve(): Response = {
-    Response.ok().entity(TodosRepresentation(Seq.empty)).build()
+  def retrieveAll(): Response = {
+    val todos = todoRepository.retrieveAll()
+    Response.ok().entity(TodosRepresentation(todos)).build()
   }
 
   @POST
