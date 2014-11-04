@@ -3,7 +3,7 @@ package emccallum.resource
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs._
 import java.net.URI
-import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
+import emccallum.representations.{TodosRepresentation, TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 
 @Path("/")
@@ -13,7 +13,7 @@ class TodoResource() {
 
   @GET
   def retrieve(): Response = {
-    Response.ok().entity("helllo").build()
+    Response.ok().entity(TodosRepresentation(Seq.empty)).build()
   }
 
   @POST

@@ -1,7 +1,7 @@
 package emccallum.resource
 
 import org.specs2.mutable.Specification
-import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
+import emccallum.representations.{TodosRepresentation, TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 
 class TodoResourceSpec extends Specification {
@@ -16,6 +16,7 @@ class TodoResourceSpec extends Specification {
 
       // Then
       response.getStatus shouldEqual 200
+      response.getEntity shouldEqual TodosRepresentation(Seq())
     }
 
     "return a 201 if the POST is successful" in {
