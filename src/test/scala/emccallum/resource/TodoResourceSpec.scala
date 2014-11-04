@@ -1,6 +1,7 @@
 package emccallum.resource
 
 import org.specs2.mutable.Specification
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 
 class TodoResourceSpec extends Specification {
@@ -19,14 +20,15 @@ class TodoResourceSpec extends Specification {
 
     "return a 201 if the POST is successful" in {
       // Given
-      val todo = Todo("hello")
+      val todo = Todo(title = "todo")
       val resource = new TodoResource()
 
       // When
-      val response = resource.create(TodoRepresentation(todo))
+      val response = resource.create(NewTodoRepresentation(title = todo.title))
 
       // Then
       response.getStatus shouldEqual 201
+      response.getEntity shouldEqual TodoRepresentation(todo)
     }
   }
 

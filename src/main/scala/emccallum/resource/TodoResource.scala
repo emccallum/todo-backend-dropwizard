@@ -3,7 +3,7 @@ package emccallum.resource
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs._
 import java.net.URI
-import com.fasterxml.jackson.annotation.JsonProperty
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 
 @Path("/")
@@ -17,13 +17,9 @@ class TodoResource() {
   }
 
   @POST
-  def create(newTodo: TodoRepresentation): Response = {
-    Response.created(URI.create("")).build()
+  def create(newTodo: NewTodoRepresentation): Response = {
+    val todo = Todo(newTodo.title)
+    Response.created(URI.create("")).entity(TodoRepresentation(todo)).build()
   }
 
-}
-
-case class TodoRepresentation(private val todo: Todo) {
-  @JsonProperty("title")
-  lazy val title = todo.title
 }
