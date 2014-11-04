@@ -30,6 +30,18 @@ class TodoResourceSpec extends Specification {
       response.getStatus shouldEqual 201
       response.getEntity shouldEqual TodoRepresentation(todo)
     }
+
+    "return a 204 if the DELETE is successful" in {
+      // Given
+      val resource = new TodoResource()
+      resource.create(NewTodoRepresentation("todo"))
+
+      // When
+      val response = resource.delete("todo")
+
+      // Then
+      response.getStatus shouldEqual 204
+    }
   }
 
 }

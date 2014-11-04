@@ -22,4 +22,9 @@ class TodoResource() {
     Response.created(URI.create("")).entity(TodoRepresentation(todo)).build()
   }
 
+  @DELETE
+  def delete(title: String): Response = {
+    Response.noContent().build()
+  }
+
 }
