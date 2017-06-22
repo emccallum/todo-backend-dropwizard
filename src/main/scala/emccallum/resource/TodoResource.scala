@@ -20,13 +20,14 @@ class TodoResource(todoRepository: TodoRepository) {
 
   @POST
   def create(newTodo: NewTodoRepresentation): Response = {
-    val todo = Todo(newTodo.title)
+    val todo = Todo(newTodo.title, "some-url")
     todoRepository.addTodo(todo)
     Response.created(URI.create("")).entity(TodoRepresentation(todo)).build()
   }
 
   @DELETE
   def delete(title: String): Response = {
+    todoRepository.deleteAll()
     Response.noContent().build()
   }
 

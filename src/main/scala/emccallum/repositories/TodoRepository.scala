@@ -12,4 +12,8 @@ class TodoRepository {
     todos = todos :+ todo
   }
 
+  def deleteAll() {
+    todos = Seq.empty;
+  }
+
 }

@@ -75,6 +75,19 @@ class TodoResourceSpec extends Specification with Mockito {
       // Then
       response.getEntity shouldEqual Seq(todo)
     }
+
+    "DELETE should remove all todos" in new TodoScope {
+      // Given
+      val todo = Todo("title")
+      mockTodoRepository.retrieveAll() returns Seq(todo)
+      val resource = new TodoResource(todoRepository = mockTodoRepository)
+
+      // When
+      val response = resource.deleteAll()
+
+      // Then
+      there was one(mockTodoRepository).deleteAll()
+    }
   }
 
 }
