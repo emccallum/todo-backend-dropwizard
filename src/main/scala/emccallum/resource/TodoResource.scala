@@ -3,7 +3,7 @@ package emccallum.resource
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs._
 import java.net.URI
-import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation, TodosRepresentation}
 import emccallum.model.Todo
 import emccallum.repositories.TodoRepository
 
@@ -15,7 +15,7 @@ class TodoResource(todoRepository: TodoRepository) {
   @GET
   def retrieveAll(): Response = {
     val todos = todoRepository.retrieveAll()
-    Response.ok().entity(todos).build()
+    Response.ok().entity(TodosRepresentation(todos)).build()
   }
 
   @POST
@@ -26,7 +26,7 @@ class TodoResource(todoRepository: TodoRepository) {
   }
 
   @DELETE
-  def delete(title: String): Response = {
+  def deleteAll(): Response = {
     todoRepository.deleteAll()
     Response.noContent().build()
   }

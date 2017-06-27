@@ -1,7 +1,7 @@
 package emccallum.resource
 
 import org.specs2.mutable.Specification
-import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation, TodosRepresentation }
 import emccallum.model.Todo
 import org.specs2.specification.Scope
 import emccallum.repositories.TodoRepository
@@ -12,6 +12,7 @@ class TodoResourceSpec extends Specification with Mockito {
   trait TodoScope extends Scope {
     val mockTodoRepository = mock[TodoRepository]
     mockTodoRepository.retrieveAll() returns Seq.empty
+    mockTodoRepository.deleteAll()
   }
 
   "TodoResource" should {
@@ -24,12 +25,12 @@ class TodoResourceSpec extends Specification with Mockito {
 
       // Then
       response.getStatus shouldEqual 200
-      response.getEntity shouldEqual Seq.empty
+      response.getEntity shouldEqual TodosRepresentation(Seq.empty)
     }
 
     "return a 201 if the POST is successful" in new TodoScope {
       // Given
-      val todo = Todo(title = "todo")
+      val todo = Todo(title = "todo", url = "some-url")
       val resource = new TodoResource(todoRepository = mockTodoRepository)
 
       // When
@@ -46,7 +47,7 @@ class TodoResourceSpec extends Specification with Mockito {
       resource.create(NewTodoRepresentation("todo"))
 
       // When
-      val response = resource.delete("todo")
+      val response = resource.deleteAll()
 
       // Then
       response.getStatus shouldEqual 204
@@ -60,12 +61,12 @@ class TodoResourceSpec extends Specification with Mockito {
       resource.create(NewTodoRepresentation(title = "title"))
 
       // Then
-      there was one(mockTodoRepository).addTodo(Todo("title"))
+      there was one(mockTodoRepository).addTodo(Todo("title", "some-url"))
     }
 
     "GET should return all todos" in new TodoScope {
       // Given
-      val todo = Todo("title")
+      val todo = Todo("title", "some-url")
       mockTodoRepository.retrieveAll() returns Seq(todo)
       val resource = new TodoResource(todoRepository = mockTodoRepository)
 
@@ -73,12 +74,12 @@ class TodoResourceSpec extends Specification with Mockito {
       val response = resource.retrieveAll()
 
       // Then
-      response.getEntity shouldEqual Seq(todo)
+      response.getEntity shouldEqual TodosRepresentation(Seq(todo))
     }
 
     "DELETE should remove all todos" in new TodoScope {
       // Given
-      val todo = Todo("title")
+      val todo = Todo("title", "some-url")
       mockTodoRepository.retrieveAll() returns Seq(todo)
       val resource = new TodoResource(todoRepository = mockTodoRepository)
 
