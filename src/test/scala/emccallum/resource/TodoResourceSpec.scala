@@ -12,7 +12,6 @@ class TodoResourceSpec extends Specification with Mockito {
   trait TodoScope extends Scope {
     val mockTodoRepository = mock[TodoRepository]
     mockTodoRepository.retrieveAll() returns Seq.empty
-    mockTodoRepository.deleteAll()
   }
 
   "TodoResource" should {
