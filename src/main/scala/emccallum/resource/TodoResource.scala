@@ -4,7 +4,7 @@ import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs._
 import java.net.URI
 import java.util.UUID
-import emccallum.representations.{TodoRepresentation, NewTodoRepresentation, TodosRepresentation}
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 import emccallum.repositories.TodoRepository
 
@@ -16,7 +16,7 @@ class TodoResource(todoRepository: TodoRepository) {
   @GET
   def retrieveAll(): Response = {
     val todos = todoRepository.retrieveAll()
-    Response.ok().entity(TodosRepresentation(todos)).build()
+    Response.ok().entity(todos).build()
   }
 
   @POST

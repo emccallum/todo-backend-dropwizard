@@ -1,7 +1,7 @@
 package emccallum.resource
 
 import org.specs2.mutable.Specification
-import emccallum.representations.{TodoRepresentation, NewTodoRepresentation, TodosRepresentation }
+import emccallum.representations.{TodoRepresentation, NewTodoRepresentation}
 import emccallum.model.Todo
 import org.specs2.specification.Scope
 import emccallum.repositories.TodoRepository
@@ -25,7 +25,7 @@ class TodoResourceSpec extends Specification with Mockito {
 
       // Then
       response.getStatus shouldEqual 200
-      response.getEntity shouldEqual TodosRepresentation(Seq.empty)
+      response.getEntity shouldEqual Seq.empty
     }
 
     "return a 201 if the POST is successful" in new TodoScope {
@@ -74,7 +74,7 @@ class TodoResourceSpec extends Specification with Mockito {
       val response = resource.retrieveAll()
 
       // Then
-      response.getEntity shouldEqual TodosRepresentation(Seq(todo))
+      response.getEntity shouldEqual Seq(todo)
     }
 
     "DELETE should remove all todos" in new TodoScope {
