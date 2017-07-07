@@ -6,6 +6,7 @@ import emccallum.model.Todo
 import org.specs2.specification.Scope
 import emccallum.repositories.TodoRepository
 import org.specs2.mock.Mockito
+import java.util.UUID
 
 class TodoResourceSpec extends Specification with Mockito {
 
@@ -29,15 +30,15 @@ class TodoResourceSpec extends Specification with Mockito {
 
     "return a 201 if the POST is successful" in new TodoScope {
       // Given
-      val todo = Todo(title = "todo", url = "some-url")
+      val title = "todo"
       val resource = new TodoResource(todoRepository = mockTodoRepository)
 
       // When
-      val response = resource.create(NewTodoRepresentation(title = todo.title))
+      val response = resource.create(NewTodoRepresentation(title = title))
 
       // Then
       response.getStatus shouldEqual 201
-      response.getEntity shouldEqual TodoRepresentation(todo)
+      response.getEntity should beAnInstanceOf[TodoRepresentation]
     }
 
     "return a 204 if the DELETE is successful" in new TodoScope {
@@ -60,12 +61,12 @@ class TodoResourceSpec extends Specification with Mockito {
       resource.create(NewTodoRepresentation(title = "title"))
 
       // Then
-      there was one(mockTodoRepository).addTodo(Todo("title", "some-url"))
+      there was one(mockTodoRepository).addTodo(Todo(any[UUID], title = "title", url = "some-url"))
     }
 
     "GET should return all todos" in new TodoScope {
       // Given
-      val todo = Todo("title", "some-url")
+      val todo = Todo(UUID.fromString("067e6162-3b6f-4ae2-a171-2470b63dff00"), "title", "some-url")
       mockTodoRepository.retrieveAll() returns Seq(todo)
       val resource = new TodoResource(todoRepository = mockTodoRepository)
 
@@ -78,7 +79,7 @@ class TodoResourceSpec extends Specification with Mockito {
 
     "DELETE should remove all todos" in new TodoScope {
       // Given
-      val todo = Todo("title", "some-url")
+      val todo = Todo(UUID.fromString("067e6162-3b6f-4ae2-a171-2470b63dff00"), "title", "some-url")
       mockTodoRepository.retrieveAll() returns Seq(todo)
       val resource = new TodoResource(todoRepository = mockTodoRepository)
 

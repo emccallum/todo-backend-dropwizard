@@ -3,6 +3,7 @@ package emccallum.resource
 import javax.ws.rs.core.{MediaType, Response}
 import javax.ws.rs._
 import java.net.URI
+import java.util.UUID
 import emccallum.representations.{TodoRepresentation, NewTodoRepresentation, TodosRepresentation}
 import emccallum.model.Todo
 import emccallum.repositories.TodoRepository
@@ -20,7 +21,8 @@ class TodoResource(todoRepository: TodoRepository) {
 
   @POST
   def create(newTodo: NewTodoRepresentation): Response = {
-    val todo = Todo(newTodo.title, "some-url")
+    val newTodoId = UUID.randomUUID
+    val todo = Todo(newTodoId, newTodo.title, "some-url")
     todoRepository.addTodo(todo)
     Response.created(URI.create("")).entity(TodoRepresentation(todo)).build()
   }
